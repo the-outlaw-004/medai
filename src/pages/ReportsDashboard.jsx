@@ -30,14 +30,6 @@ const ReportsDashboard = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const getStatusBadge = (status) => {
-    if (status === "COMPLETED")
-      return <span className="badge bg-success">Completed</span>;
-    if (status === "PROCESSING")
-      return <span className="badge bg-warning text-dark">Processing</span>;
-    return <span className="badge bg-secondary">Queued</span>;
-  };
-
   if (loading) return <p className="text-center mt-5">Loading reports...</p>;
 
   return (
@@ -52,17 +44,17 @@ const ReportsDashboard = () => {
         <div className="list-group">
           {reports.map((report) => (
             <button
-              key={report._id}
+              key={report.id}
               className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
               onClick={() => navigate(`/report/${report.id}`)}
             >
               <div>
                 <strong>{report.fileName}</strong>
                 <div className="small text-muted">
-                  Uploaded: {new Date(report.createdAt).toLocaleString()}
+                  Uploaded: {new Date(report.created_at).toLocaleString()}
                 </div>
               </div>
-              {getStatusBadge(report.status)}
+              {report.status}
             </button>
           ))}
         </div>

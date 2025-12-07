@@ -7,7 +7,6 @@ const ReportDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [report, setReport] = useState(null);
-  console.log("report", report);
   const [loading, setLoading] = useState(true);
 
   const fetchReport = async () => {

@@ -34,8 +34,6 @@ export default function UploadReport() {
         },
       });
 
-      console.log("response", res);
-
       alert("Upload successful! Processing started...");
       navigate("/dashboard");
     } catch (err) {
