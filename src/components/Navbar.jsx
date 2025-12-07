@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../api/auth";
 import { AuthContext } from "../context/AuthContext";
 
@@ -30,12 +30,20 @@ export default function Navbar() {
         MedAI
       </h2>
 
-      <button
-        onClick={handleLogout}
-        className="text-sm px-3 py-1 border rounded hover:bg-gray-200"
-      >
-        Logout
-      </button>
+      <div>
+        <Link
+          to="/upload"
+          className="mx-4 text-sm px-3 py-1 border rounded hover:bg-gray-200"
+        >
+          Upload Report
+        </Link>
+        <button
+          onClick={handleLogout}
+          className="text-sm px-3 py-1 border rounded hover:bg-gray-200"
+        >
+          Logout
+        </button>
+      </div>
     </nav>
   );
 }
