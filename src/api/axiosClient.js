@@ -17,18 +17,19 @@ api.interceptors.response.use(
   (res) => res,
   async (err) => {
     const original = err.config;
-    if (err.response?.status === 401 && !original._retry) {
+    const storedToken = localStorage.getItem("accessToken");
+    if (err.response?.status === 401 && storedToken && !original._retry) {
       original._retry = true;
       try {
         const refreshRes = await api.post("/auth/refresh");
         const newToken = refreshRes.data?.accessToken;
         localStorage.setItem("accessToken", newToken);
-        original.headers.Authorization = `Bearer ${token}`;
+        original.headers.Authorization = `Bearer ${newToken}`;
         return api(original);
       } catch (refreshError) {
         console.log("referesh failed", refreshError);
         localStorage.removeItem("accessToken");
-        window.location.href = "/login";
+        return Promise.reject(refreshError);
       }
     }
     return Promise.reject(err);
