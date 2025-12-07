@@ -2,7 +2,7 @@ function App() {
 
   return (
     <>
-      <p>Vite + React</p>
+      <h1 className="text-3xl font-bold text-red-500">Tailwind test</h1>
     </>
   )
 }
